@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>EJF EX02</title>
+        <%
+            let count = num;
+
+            function zeroPad(nr,base){
+                var  len = (String(base).length - String(nr).length)+1;
+                return len > 0? new Array(len).join('0')+nr : nr;
+            }
+        %>
+    </head>
+    <body>
+        <%= name %>
+        <hr>
+        <%= age %>
+        <br><br>
+
+        <% for(let i=1;i <= count;i++) { %>
+            <p><%= `${zeroPad(i,10)}. Name : ${name} | Age : ${age}` %></p>
+        <% } %>
+
+    </body>
+</html>

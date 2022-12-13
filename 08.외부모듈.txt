@@ -1,0 +1,16 @@
+* 탬플릿 엔진 : 레이아웃을 생성하고, 데이터를 주고 받게 한다.
+
+* ejs 모듈
+ - ejs모듈 설치 : npm install ejs
+ - ejs 파일 안에서 jscode 사용 <% jscode %>
+ - ejs 파일 안에서 표시 <%= value %>
+
+* Jade 모듈(pug)
+ - Jade모듈 설치 : npm install jade
+ - jade파일 안에서 jscode 사용 - jscode
+ - jade파일 안에서 표시 #{value} -> 부분값 입력
+ - jade파일 안에서 표시 =value -> 전체값 입력
+ - 들여쓰기가 상당히 중요하다.
+
+* Express 모듈
+ - Express모듈 설치 : npm install express@4 (@는 버전을 의미한다.)

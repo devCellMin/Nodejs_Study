@@ -1,0 +1,25 @@
+doctype html
+html(lang="ko")
+    head
+        // 주석 - 들여쓰기 중요
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title JADE EX 01
+        
+        // JS 시작
+        - let count = (num == -1) ? 0 : num;
+    body 
+        h1 Hello World!
+        div.myName 내 이름은 #{name}입니다.
+        div#myAge= age 
+
+        hr
+        a(href='http://www.naver.com', title='네이버') 네이버
+
+        if count == 0
+            p 입력받은 수가 없습니다.
+        
+        - for(let i=1;i<=count;i++) {
+            p #{i}. 내 이름은 #{name}이고 나이는 #{age}입니다.
+        -}

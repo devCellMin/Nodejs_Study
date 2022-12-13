@@ -1,0 +1,34 @@
+<!-- //edit.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>수정</title>
+</head>
+<body>
+    <h1>수정</h1>
+    <hr>
+    <!-- <form method="post" action="/edit/<%=result.id %>"> 이와 같이 파라메터로 넘겨주거나 hiddden으로 받아내기도 한다 -->
+    <form method="post">
+        <table>
+            <tr>
+                <td>이름</td>
+                <td><input type="text" name="name" value="<%=result.name %>"></td>
+            </tr>
+            <tr>
+                <td>나이</td>
+                <td><input type="text" name="age" value="<%=result.age %>"></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="submit">
+                    <input type="hidden" name="id" value="<%=result.id %>">
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

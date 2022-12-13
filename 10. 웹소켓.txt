@@ -1,0 +1,20 @@
+웹 소켓
+
+https://www.rfc-editor.org/rfc/rfc6455
+https://socket.io/
+
+설치 : npm install socket.io@1
+@1은 ver.01을 다운 받겠다는 의미이다.
+
+socket.io 이벤트
+connection : 사용자가 접속할 때
+disconnection : 사용자가 접속을 끊을 때
+
+socket.emit : 해당 브라우저에만 응답
+public : 모든 사용자에게 데이터 전송
+broadcast : 자신 제외 데이터 전송
+private :  1 vs 1로 데이터 전송
+
+룸설정 메서드(room 설정)
+join() : 이름의 방을 생성 후, 입장
+io.socket.in() / io.socket.to() : 룸 채팅

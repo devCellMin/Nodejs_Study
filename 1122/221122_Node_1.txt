@@ -1,0 +1,77 @@
+RESTful API(https://meetup.toast.com/posts/92)
+
+(jsbin에 들어가서 작업)
+let DB = [
+ {
+  id: 1,
+  name: "홍길동",
+  age: 28
+ },
+ {
+  id: 2,
+  name: "고길동",
+  age: 45
+ },
+ {
+  id: 3,
+  name: "최길동",
+  age: 7
+ },
+];
+
+function getDB(id){
+ if(id){//id
+  for(var i in DB){
+   if(DB[i].id === id)return DB[i];
+  }
+ }
+ else{//전체
+  return DB;
+ }
+}
+
+let cnt = DB.length;//3
+
+//추가
+function insertDB(data){
+ //++cnt
+ //cnt += 1;
+ //cnt = cnt + 1
+ data.id = ++cnt;
+ DB.push(data);
+ return data;
+}
+
+//삭제
+function delDB(id){
+ for(var i in DB){
+  if(DB[i].id === id){
+   DB.splice(i, 1);
+   return true;
+  }
+  else{
+   DB = [];
+   return true;
+  }
+ }
+ return false;
+}
+
+//수정
+function modDB(id, name, age){
+ id = (typeof id === 'string') ? Number(id): id;
+ if(id){
+  let item = getDB(id);
+  item.name = name || item.name;
+  item.age = age || item.age;
+  return true;
+ }
+ return false;
+}
+insertDB({name: "강길동", age: 77});
+insertDB({name: "마길동", age: 92});
+insertDB({name: "조길동", age: 109});
+
+modDB(3, null, 55);
+console.log(getDB());
+//console.log(delDB(2));

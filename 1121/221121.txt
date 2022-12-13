@@ -1,0 +1,33 @@
+query 값 추출
+주소?키=값&키=값
+
+미들웨어: 중간 프로그램
+
+미들웨어: 중간 프로그램
+router 미들웨어
+get(경로, 콜백) : 검색
+post(경로, 콜백) : 입력
+all(경로, 콜백) : 나머지
+========================>
+put(경로, 콜백) : 수정
+delete(경로, 콜백) : 삭제
+
+params "/:params" (express5.js)
+router 모듈화(express6.js)
+
+cookie parser
+설치 npm install cookie-parser
+
+body parser(POST 데이터 사용)
+설치 npm install body-parser
+application/x-www-form-urlencoded
+
+connect-multiparty (파일 데이터 사용)
+설치 npm install connect-multiparty
+multiparty/form-date
+
+---참고자료---
+https://www.npmjs.com/package/cookie-parser
+https://jw910911.tistory.com/59
+https://stackoverflow.com/questions/29960764/what-does-extended-mean-in-express-4-0/45690436#45690436
+https://sjh836.tistory.com/154

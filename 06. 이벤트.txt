@@ -1,0 +1,13 @@
+* 자바 스크립트에서의 일반적인 이벤트 처리
+element.addEventListener('Event_Type', Event_Handler_Function);
+element.on+Event_Name = Event_Handler_Function;
+
+* NodeJS에서의 이벤트 처리
+on('Event_Type', Event_Handler_Function) = addEventListener
+emit() : 이벤트 실행
+
+* 사용자 이벤트
+events 객체 사용(EventEmitter 객체)
+
+이벤트는 10개까지 추가할 수 있다.
+But! 설정으로 10개 이상으로 추가 가능하다.

@@ -1,0 +1,10 @@
+npm : 프로젝트를 관리, 외부 모듈 관리(의존성 관리)
+
+npm init : 패키지 초기화 (질문)
+npm init -y(--yes) : 패키지 초기화
+npm install 모듈이름 : 외부 모듈 설치
+npm install : package.json 읽어서 설치
+
+module 설치 방식
+지역 설치 : (ex: emoji...) - 폴더 단위 사용
+전역 설치 : (ex: nodemon)전체 시스템에서 사용

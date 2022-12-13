@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- socket.io.js socket.io를 설치시 자동으로 파일이 등록 -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        window.onload = function() {
+            // IO에 서버에 접근
+            let socket = io.connect();
+
+            btn.onclick = function() {
+                socket.emit('test', text.value);
+                text.value = "";
+            }
+
+            socket.on('reciveTest', function(data) {
+                // alert(data);
+                content.insertAdjacentHTML('beforeend', `<li>${data}</li>`);
+            });
+
+        };
+    </script>
+</head>
+<body>
+    <input type="text" id="text">
+    <button id="btn">ECHO</button>
+
+    <ul id="content"></ul>
+</body>
+</html>

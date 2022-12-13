@@ -1,0 +1,11 @@
+파일처리
+
+동기적으로 처리
+fs.readFileSync(path[, options])
+fs.writeFileSync(path[, options])
+
+비동기적으로 처리(node)
+fs.readFile(path[, options], callback)
+fs.writeFile(path[, options])
+
+책 추천 : 인사이드 자바스크립트, 함수형 자바스크립트, 패턴쪽으로 추가적으로 책을 찾아보는 것도 좋다.

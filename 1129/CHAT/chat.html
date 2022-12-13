@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Chatting Practice</title>
+        <script src="/socket.io/socket.io.js"></script>
+        <style>
+            *, html, body {margin: 0; padding: 0; box-sizing: border-box;}
+            html, body {width: 100%; height: 100%;}
+            #chatting-wrap {width: 100%; height: 100%; display: flex;}
+
+            #chatting-wrap>section {
+                border: 1px solid black;
+                width: calc(100% - 230px);
+                height: 100%;
+                padding: 5px;
+                display: flex;
+                flex-direction: column;
+            }
+
+            #content {
+                list-style: none;
+                width: 100%;
+                height: calc(100% - 165px);
+                padding: 5px;
+                overflow-y: auto;
+            }
+
+            #content>li {
+                margin-bottom: 10px;
+                border-bottom: 1px solid black;
+            }
+
+            #content>li>h3 {
+                font-size: 17px;
+                position: relative;
+                margin-bottom: 5px;
+            }
+
+            #content>li>h3>span {
+                font-size: 12px;
+                font-weight: normal;
+                position: absolute;
+                right: 5px;
+            }
+
+            #content>li>p {
+                font-size: 15px;
+            }
+
+            #userName {
+                width: 100%;
+                font-size: 20px;
+                font-weight: bold;
+                padding: 2px;
+                border: none;
+            }
+
+            #message {
+                width: 100%;
+                height: 100px;
+                resize: none;
+                padding: 5px;
+            }
+
+            #btnChat {
+                width: 100%;
+                height: 30px;
+                margin-top: 5px;
+            }
+
+            #chatting-wrap>aside {
+                width: 230px;
+                height: 100%;
+                padding: 30px 0 0 20px;
+            }
+
+            #users {
+                padding-left: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="chatting-wrap">
+            <section>
+                <ul id="content"></ul>
+                <input type="text" id="userName" readonly><hr>
+                <textarea name="message" id="message" cols="30" rows="10"></textarea>
+                <input type="button" id="btnChat" value="보내기">
+            </section>
+            <aside>
+                <p>※ 사용자</p>
+                <ul id="users"></ul>
+            </aside>
+        </div>
+
+        <script>
+            window.onload = function() {
+                const socket = io.connect();
+                const roomName = "ChattingRoom";
+
+                userName.value = prompt("이름을 입력하세요.");
+                socket.emit('join', {
+                    "roomName": roomName,
+                    "userName": userName.value
+                });
+
+                socket.on("greeting", function(data) {
+                    document.title = data;
+                });
+
+                socket.on("set", function(data) {
+                    data.forEach(element => {
+                        users.insertAdjacentHTML('beforeEnd', 
+                        `<li>
+                            ${element["name"]}
+                            <input type='checkbox' name='privateChat' value='${element["id"]}'>
+                        </li>`);
+                    });
+                });
+
+                socket.on("add", function(data) {
+                    users.insertAdjacentHTML('beforeEnd', 
+                    `<li>
+                        ${data["name"]}
+                        <input type='checkbox' name='privateChat' value='${data["id"]}'>
+                    </li>`);
+                });
+
+                btnChat.onclick = function() {
+                    if(message.value.length == 0) {
+                        message.focus();
+                        return;
+                    }
+
+                    let privateMessage = document.getElementsByName("privateChat");
+                    let privateTF = false;
+                    let privateWho = [];
+
+                    privateMessage.forEach((item, index)=> {
+                        if(item.checked) {
+                            privateWho.push(item.value);
+                            privateTF = true;
+                        }
+                    });
+
+                    let data = {
+                        "name": userName.value,
+                        "message": message.value,
+                        "time": new Date().toGMTString()
+                    };
+
+                    if(!privateTF) {
+                        socket.emit('message', data);
+                    }else {
+                        socket.emit('privateMessage', {
+                            ...data,
+                            "toWho":privateWho
+                        });
+                    }
+                    message.value = "";
+                };
+
+                socket.on('message', function(data) {
+                    content.insertAdjacentHTML('beforeEnd', 
+                    `<li>
+                        <h3>
+                            ${data["name"]}
+                            <span>
+                                ${data["time"]}
+                            </span>
+                        </h3>
+                        <p>${data["message"]}</p>
+                    </li>`);
+                });
+
+                socket.on("deluser", function(data) {
+                    users.getElementsByTagName("li")[data].remove();
+                });
+            };
+        </script>
+    </body>
+</html>

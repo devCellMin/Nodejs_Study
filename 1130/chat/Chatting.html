@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title></title>
+        <script src="/socket.io/socket.io.js"></script>
+        <style>
+            *, html, body {margin: 0; padding: 0; box-sizing: border-box;}
+            html, body {width: 100%; height: 100%;}
+            #wrap {width: 100%; height: 100%; display: flex;}
+
+            #wrap>section {
+                flex: 1;
+                padding: 5px;
+            }
+            #userName {
+                width: 100%;
+                font-size: 17px;
+                padding: 8px 5px 2px 5px;
+                border: none;
+            }
+            #message {
+                width: 100%;
+                height: 150px;
+                margin-top: 5px;
+                padding: 5px;
+                resize: none;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="wrap">
+            <section>
+                <ul id="content"></ul>
+                <input type="text" id="userName"><hr>
+                <textarea name="message" id="message" cols="30" rows="10"></textarea>
+                <input type="button" id="btnChat" value="보내기">
+            </section>
+            <aside>
+                <p>※ 사용자</p>
+                <ul id="users"></ul>
+            </aside>
+        </div>
+
+        <script>
+            window.onload = function() {
+                const socket = io.connect();
+                // const roomName = "";
+
+                // userName.value = prompt("이름을 입력하세요.");
+
+
+
+                btnChat.onclick = ()=> {
+                    if(!userName.value.replace(/\s*/g,'')){
+                        alert('이름을 입력하세요.');
+                        userName.value = "";
+                        userName.focus();
+                        return;
+                    }
+
+                    if(!message.value.trim()) {
+                        alert('내용을 입력하세요.');
+                        message.focus();
+                        return;
+                    }
+
+                    let data = {
+                        "name":userName.value,
+                        "message":message.value,
+                        "time": new Date().toGMTString()
+                    }
+
+                    socket.emit('message', data);
+                    message.value = "";
+                };
+
+                socket.on('message', (data)=> {
+                    content.insertAdjacentHTML('beforeEnd', 
+                    `<li>
+                        <h3>${data["name"]}
+                            <span>${data["time"]}</span>
+                        </h3>tr 
+                        <p>${data["message"]}</p>
+                    </li>`);
+                });
+            };
+        </script>
+    </body>
+</html>

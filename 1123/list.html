@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>리스트</title>
+</head>
+<body>
+    <h1>리스트</h1>
+    <hr>
+    <a href="/user">삽입</a>
+    <table border="1">
+        <tr>
+            <th>번호</th>
+            <th>이름</th>
+            <th>나이</th>
+            <th>수정</th>
+            <th>삭제</th>
+        </tr>
+        <% result.forEach(function(item, index) { %>
+            <tr>
+                <td>
+                    <%= item.id %>
+                </td>
+                <td>
+                    <%= item.name %>
+                </td>
+                <td>
+                    <%= item.age %>
+                </td>
+                <td>
+                    <a href="/edit/<%=item.id %>">수정</a>
+                </td>
+                <td>
+                    <a href="/delete/<%=item.id %>">삭제</a>
+                </td>
+            </tr>
+        <% }); %>
+    </table>
+</body>
+</html>

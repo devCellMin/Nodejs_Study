@@ -1,0 +1,13 @@
+* http 모듈
+요청(request)  : 클라이언트가 서버에 질문
+응답(response) : 서버가 클라이언트의 요청에 응답
+
+* 서버생성 : http.createServer([options][, requestListener])
+
+이벤트
+request: 사용자가 요청할 때마다 발생
+connection: 사용자가 접속 할 때 한번 발생
+close: 사용자가 종료할 때 발생
+
+쿠키 : 배열로 저장
+request: 주소를 읽어 분기
